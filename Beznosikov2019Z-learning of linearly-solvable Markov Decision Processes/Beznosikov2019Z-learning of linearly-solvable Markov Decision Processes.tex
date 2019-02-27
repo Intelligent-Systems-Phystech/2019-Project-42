@@ -31,7 +31,7 @@ In the area of power systems there is a huge demand on fast reinforcement learni
 
 The behavior of the system of devices in time is considered as a discrete Markov process. In general, this problem is not solved simply. But in \cite{Todorov} there are several ways to solve it optimally. Most methods require knowledge of what happens if a system "left alone" long enough. But in practice it often happens that this information is hidden from us.
 
-In this paper it is proposed to use the Z-learning method (stochastic modification of Q-learning from \cite{Szepesvari,Allen}). Together with the solution of the main task of the MDP in parallel to restore unknown data on the behavior of the system. With this algorithm, a working model of system management will be built based only on limited samples of representative behavior. We compare the speed and quality of the two algorithms when solving the MDP, describing via transition probability matrix. Given initial state vector (probability of being in a state at time zero), we generate data for the time evolution of the state vector. 
+In this paper it is proposed to use the Z-learning method (stochastic modification of Q-learning from \cite{Szepesvari,Allen}). Together with the solution of the main task of the MDP in parallel to restore unknown data on the behavior of the system. With this algorithm, a working model of system management will be built based only on limited samples of representative behavior. We compare the speed and quality of the two algorithms: Z-learning and Q-learning, when solving the MDP, describing via transition probability matrix. Given initial state vector (probability of being in a state at time zero), we generate data for the time evolution of the state vector. 
 
 
 
