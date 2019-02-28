@@ -1,14 +1,48 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Korte}
+Jens~Vygen Bernhard~Korte.
+\newblock {\em Combinatorial optimization. Theory and Algorithms}.
+\newblock MCCME, translation edition, 2015.
 
 \bibitem{Chertkov}
 Michael Chertkov and Vladimir~Y. Chernyak.
 \newblock Ensemble control of cycling energy loads: Markov decision approach.
 \newblock {\em CoRR}, abs/1701.04941, 2017.
 
+\bibitem{Durrett}
+Richard Durrett.
+\newblock {\em Probability: theory and examples}.
+\newblock Duxbury Press, Belmont, CA, second edition, 1996.
+
 \bibitem{Allen}
 Chi Jin, Zeyuan Allen-Zhu, S{\'e}bastien Bubeck, and Michael~I. Jordan.
 \newblock Is q-learning provably efficient?
 \newblock {\em CoRR}, abs/1807.03765, 2018.
+
+\bibitem{Kim}
+Sunyong Kim and Hyuk Lim.
+\newblock Reinforcement learning based energy management algorithm for smart
+  energy buildings.
+\newblock {\em Energies}, 11:2010, 08 2018.
+
+\bibitem{Ruiz}
+Elizaveta Kuznetsova, Yan-Fu Li, Carlos Ruiz, Enrico Zio, Keith Bell, and
+  Graham Ault.
+\newblock Reinforcement learning for microgrid energy management.
+\newblock {\em Energy}, 59:133–146, 05 2013.
+
+\bibitem{Raju}
+Raju Leo, R~S~Milton, and S~Sibi.
+\newblock Reinforcement learning for optimal energy management of a solar
+  microgrid.
+\newblock pages 183--188, 09 2014.
+
+\bibitem{Liessner}
+Roman Liessner, Christian Schroer, Ansgar Dietermann, and Bernard Bäker.
+\newblock Deep reinforcement learning for advanced energy management of hybrid
+  electric vehicles.
+\newblock pages 61--72, 01 2018.
 
 \bibitem{Szepesvari}
 Csaba Szepesv{\'a}ri.

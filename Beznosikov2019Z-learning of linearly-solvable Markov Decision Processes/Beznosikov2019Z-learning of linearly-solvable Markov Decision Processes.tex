@@ -5,9 +5,9 @@
     [Z-learning of linearly-solvable Markov Decision Processes] % Краткое название; не нужно, если полное название влезает в~колонтитул
     {Z-learning of linearly-solvable Markov Decision Processes}
 \author
-    [Безносиков А.Н.] % список авторов для колонтитула; не нужен, если основной список влезает в колонтитул
-    {Безносиков А.Н., Максимов Ю.В., Чертков М., Стрижов В.В.} % основной список авторов, выводимый в оглавление
-    [Aleksandr Beznosikov$^1$, Yury Maximov, Michael Chertkov, Vadim Strijov] 
+    [Aleksandr Beznosikov] % список авторов для колонтитула; не нужен, если основной список влезает в колонтитул
+    {Aleksandr Beznosikov} % основной список авторов, выводимый в оглавление
+    [Aleksandr Beznosikov$^1$] 
 \thanks
     {Supervisor:  Vadim Strijov
    Task author:  Michael Chertkov
@@ -17,21 +17,26 @@
 \organization
     {$^1$Moscow Institute of Physics and Technology}
 \abstract
-    {Considered methods for solving the problem of discrete Markov Decision Process. For certain class of MPDs which greatly simplify Reinforcement Learning. In this paper we adapt a  modification (Z - learning) to the case of Markov Decision Process discussed in the context of energy systems and solve the optimal control problem by incomplete data. Comparing with standard Q-learning, show that modification of algorithm gives faster and more reliable solution. 
+    {We consider methods for solving the problem of discrete Markov Decision Process. For certain class of MPDs which greatly simplify Reinforcement Learning. In this paper we adapt a  modification (Z - learning) to the case of Markov Decision Process discussed in the context of energy systems and solve the optimal control problem by incomplete data. Comparing with standard Q-learning, show that modification of algorithm gives faster and more reliable solution. 
 
 \bigskip
 \textbf{Keywords}: \emph {Markov Decision Process, Z - learning, Q-learning}.}
 
 \begin{document}
+\English
 \maketitle
 
 \section{Introduction} 
 
-In the area of power systems there is a huge demand on fast reinforcement learning algorithms, but there is still a lack of that. In this paper we solve the problem of optimal energy system consisting of a set of devices from \cite{Chertkov}.
+In the area of power systems there is a huge demand on fast reinforcement learning algorithms. Especially they are needed in energy systems, which are very dependent on external influences and external conditions. These algorithms allow you to quickly and adequately respond to changes around the system, make decisions about changing the state of the system, and help you optimally adapt to customer requests. 
 
-The behavior of the system of devices in time is considered as a discrete Markov process. In general, this problem is not solved simply. But in \cite{Todorov} there are several ways to solve it optimally. Most methods require knowledge of what happens if a system "left alone" long enough. But in practice it often happens that this information is hidden from us.
+For example, reinforcement learning is used for the derivation of efficient operating strategies for hybrid electric vehicles \cite{Liessner}; for solar microgrid energy management\cite{Raju}; or for a smart energy building \cite{Kim}. In \cite{Ruiz} they use reinforcement learning for system with wind generator to pridict available wind power for selecting the optimal battery scheduling actions under different time-dependent environmental conditions and increasing the consumer independence from the external grid. 
 
-In this paper it is proposed to use the Z-learning method (stochastic modification of Q-learning from \cite{Szepesvari,Allen}). Together with the solution of the main task of the MDP in parallel to restore unknown data on the behavior of the system. With this algorithm, a working model of system management will be built based only on limited samples of representative behavior. We compare the speed and quality of the two algorithms: Z-learning and Q-learning, when solving the MDP, describing via transition probability matrix. Given initial state vector (probability of being in a state at time zero), we generate data for the time evolution of the state vector. 
+In this paper we solve the problem of optimal energy system from \cite{Chertkov}. Given a set of devices that can be in a certain number of states at a particular point in time. We need to transfer this system from the initial state to the optimal one. Each transition has a certain probability; being in each state has some cost; the system responds to each transition. It is necessary to minimize the waste of energy (or other resources) that we will require to transfer the system from the initial state to the final state. At the same time, we should not forget about the qualitative description of each state (some may be unacceptable for us).
+
+The behavior of the system of devices in time is considered as a discrete Markov process \cite{Durrett}. In the general case, the solution of the discrete optimization problem is NP complete \cite{Korte} and we can not solve it simply. But in \cite{Todorov} there is description of a specific MDP class, which we can solve optimally. Most methods require knowledge of what happens if a system "left alone" long enough. But in practice it often happens that we don't have this information.
+
+In this paper it is proposed to use the Z - learning method (stochastic modification of Q-learning from \cite{Szepesvari,Allen}). Together with the solution of the main task of the MDP in parallel to restore unknown data on the behavior of the system. With this algorithm, a working model of system management will be built based only on limited samples of representative behavior. We compare the speed and quality of the two algorithms: Z-learning and Q-learning, when solving the MDP, describing via transition probability matrix. Given initial state vector (probability of being in a state at time zero), we generate data for the time evolution of the state vector. 
 
 
 
