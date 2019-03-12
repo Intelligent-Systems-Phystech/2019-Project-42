@@ -6,9 +6,10 @@ Jens~Vygen Bernhard~Korte.
 \newblock MCCME, translation edition, 2015.
 
 \bibitem{Chertkov}
-Michael Chertkov and Vladimir~Y. Chernyak.
+Michael Chertkov, Vladimir~Y Chernyak, and Deepjyoti Deka.
 \newblock Ensemble control of cycling energy loads: Markov decision approach.
-\newblock {\em CoRR}, abs/1701.04941, 2017.
+\newblock In {\em Energy Markets and Responsive Grids}, pages 363--382.
+  Springer, 2018.
 
 \bibitem{Durrett}
 Richard Durrett.

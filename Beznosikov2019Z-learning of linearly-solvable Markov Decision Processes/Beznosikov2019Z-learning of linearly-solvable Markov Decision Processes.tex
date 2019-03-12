@@ -1,5 +1,7 @@
 \documentclass[12pt,twoside]{article}
 \usepackage{jmlda}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 %\NOREVIEWERNOTES
 \title
     [Z-learning of linearly-solvable Markov Decision Processes] % Краткое название; не нужно, если полное название влезает в~колонтитул
@@ -34,11 +36,123 @@ For example, reinforcement learning is used for the derivation of efficient oper
 
 In this paper we solve the problem of optimal energy system from \cite{Chertkov}. Given a set of devices that can be in a certain number of states at a particular point in time. We need to transfer this system from the initial state to the optimal one. Each transition has a certain probability; being in each state has some cost; the system responds to each transition. It is necessary to minimize the waste of energy (or other resources) that we will require to transfer the system from the initial state to the final state. At the same time, we should not forget about the qualitative description of each state (some may be unacceptable for us).
 
-The behavior of the system of devices in time is considered as a discrete Markov process \cite{Durrett}. In the general case, the solution of the discrete optimization problem is NP complete \cite{Korte} and we can not solve it simply. But in \cite{Todorov} there is description of a specific MDP class, which we can solve optimally. Most methods require knowledge of what happens if a system "left alone" long enough. But in practice it often happens that we don't have this information.
+The behavior of the system of devices in time is considered as a discrete Markov decision process \cite{Durrett}. In the general case, the solution of the discrete optimization problem is NP complete \cite{Korte} and we can not solve it simply. But in \cite{Todorov} there is description of a specific MDP class -- LS-MDPs, which we can solve optimally. Most methods require knowledge of what happens if a system "left alone" long enough. But in practice it often happens that we don't have this information.
 
-In this paper it is proposed to use the Z - learning method (stochastic modification of Q-learning from \cite{Szepesvari,Allen}). Together with the solution of the main task of the MDP in parallel to restore unknown data on the behavior of the system. With this algorithm, a working model of system management will be built based only on limited samples of representative behavior. We compare the speed and quality of the two algorithms: Z-learning and Q-learning, when solving the MDP, describing via transition probability matrix. Given initial state vector (probability of being in a state at time zero), we generate data for the time evolution of the state vector. 
+In this paper it is proposed to use the Z - learning method (stochastic modification of Q-learning from \cite{Szepesvari,Allen}). Together with the solution of the main task of the MDP in parallel to restore unknown data on the behavior of the system. With this algorithm, a working model of system management will be built based only on limited samples of representative behavior. We compare the speed and quality of the two algorithms: Z-learning and Q-learning, when solving the MDP, describing via transition probability matrix. Given initial state vector (probability of being in a state at time zero), we generate data for the time evolution of the state vector.
+
+\section{Theoretical statement of the problem}
+
+\paragraph{Formal statement of the problem}
+As mentioned above, we work with a system of devices. Their behavior can be described by MDP:
+
+\begin{Def}
+    Markov decision process consists of 
+    \begin{enumerate}
+        \item set of states $S$, 
+    
+        \item set of actions $A$, 
+    
+        \item $P(t)$ is the transition probability matrix. The matrix element $p_{ij}(t)$ is the probability for a device which was at state $j$ at time $t$ to transition to state $i$ at $t+1$.
+    
+        \item $\Upsilon(t)$ is the cost matrix. The matrix element $\gamma_{ij}(t)$ is encouraging for the transition from $j$  to state $i$.
+    \end{enumerate}
+\end{Def}
+
+    This is the classic definition of MDP. In this paper and in \cite{Chertkov} we work with other definition of MDP. There is no set of actions $A$, but $P$ is variable. We turn to a similar model of the MDP. In this model deffirent matrixes $P$ correspond to different actions in the classical understanding of the MDP.
+    
+    Other notations:
+    \begin{itemize}
+        \item vector $\rho (t)$, where $\rho_i (t) \geq 0$  is the probability to find a device in state $i$ at time $t$. The vector is normalized at all times ($\sum\limits_{i}\rho_{i}(t) = 1,~~~\forall t, ~~\forall j$).
+considered
+
+        \item vector $u (t)$, where $u_i(t)$ is the cost for being in state $i$ at time $t$.
+    \end{itemize}
 
 
+The task formulated in \cite{Chertkov} looks like:
+
+\begin{subequations}
+\begin{align}
+    & \min\limits_{p, \rho} \sum\limits_{t = 0}^{T-1} \sum\limits_{j} \rho_{j}(t)\left(\sum\limits_{i}p_{ij}(t)\left(  U_{i}(t+1) + \gamma_{ij} \log\frac{p_{ij}}{\bar p_{ij}}\right)\right) \\
+\text {s.t. } & \sum\limits_{i}p_{ij}(t) = 1,~~~\forall t, ~~\forall j \\
+& \rho_{i}(t+1) = \sum\limits_{j}p_{ij}(t)\rho_{j}(t) = 1,~~~\forall t, ~~\forall i\\
+&\text{initial conditions: } \rho_{i}(0), ~~~\forall i
+\end{align}
+\end{subequations}
+
+where (1a) is target "cost vs welfare"{}, (1b) - (1c) are stochastic restrictions. 
+
+$P$ is the optimization/control variable. $\bar P$ is stochastic matrix
+describing  the  transition  probabilities  corresponding  to  normal  dynamics within the ensemble ($\bar P$ explains the dynamics that the system would show if $u = 0$).
+
+In practice, we do not have access to knowledge about the system, so methods of Q-learning and Z-learning will be suitable for solving our problem.
+
+\paragraph{Machine learning statement of the problem}
+
+Let's give a couple of definitions for Q-learning and Z-learning:
+
+\begin{Def}
+Reward function is a function showing rewards for $T-1$ steps:
+\begin{equation}
+R_t = \sum\limits_{t=0}^{T-1} r_t
+\end{equation}
+
+\end{Def}
+
+\begin{Def}
+Optimal value function is an  expected total the profit that an agent will receive if he starts with this states and will follow the optimal strategy:
+\begin{equation}
+V(i) = \max \left[\mathsf{E}\left(\sum\limits_{t=0}^{T-1} r_t \right) | s_0 = i\right]
+\end{equation}
+
+Z - function is for Z - learning:
+\begin{equation}
+Z(i) = - \log(V(i)) 
+\end{equation}
+\end{Def}
+
+We works with an obvious stochastic approximation $\bar Z$ to the function $Z$. In the notation of our model:
+
+We have a set of datas 
+
+$$\mathfrak{G} = (i_k, j_k, u_k)$$
+
+where $i_k$ is a current state, $j_k$ - the next state, $u_k$ - cost for being in $i_k$, $k = \mathfrak{G}$ - sample size.
+
+\begin{equation}
+\bar Z(i_k) = (1 - \alpha_k)\bar Z(i_k) + \alpha_k \exp(-q_k)\bar Z(j_k)
+\end{equation}
+
+\begin{Def}
+Optimal action-value function is n  expected total the profit that an agent will receive if he starts with this states and chooses this action and will follow the optimal strategy:
+\begin{equation}
+Q(i,p) = \max \left[\mathsf{E}\left(\sum\limits_{t=0}^{T-1} r_t \right) | s_0 = i,~~a_0 = p\right]
+\end{equation}
+\end{Def}
+
+We have a set of datas 
+
+$$\mathfrak{G} = (i_k, j_k, l_k, p_k)$$
+
+where $k = \mathfrak{G}$ - sample size, $i_k$ is a current state, $j_k$ - the next state, $l_k$ isn't cost for being in $i_k$, but a total cost, which depends on $u$ and $\Upsilon$.
+
+\begin{equation}
+\bar Q(i_k, p_k) = (1 - \alpha_k)\bar Q(i_k, p_k) + \alpha_k \min\limits_{p'}(l_k + \bar Q(j_k, p'))
+\end{equation}
+
+\begin{algorithm}[h]
+	\caption{Q - learning}
+	\label{alg:Q}
+	\begin{algorithmic}[1]
+        \STATE	{\bfseries Initialize:}  Strategy $\pi_0(p|s)$ and $s_0$
+		\FOR{$t=0,1,2,\ldots, T-1$}
+		\STATE Choose the matrix $p_t \sim \pi_t(p|s_t)$:\\
+		$p_t = \arg \max\limits_{p} Q(s_t,p)$
+		\STATE Answer of the system: $r_{t+1} \sim p(r|p_t, s_t)$ and $s_t \sim p(s|p_t, s_t)$
+		\STATE $Q(s_t, p_t) := Q(s_t, a_t) + \alpha_t(r_{t+1} + \max\limits_{p'}Q(s_{t+1}, p') - Q(s_t, p_t))$
+		\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
 
 \bibliographystyle{plain}
 \bibliography{Beznosikov201942}
