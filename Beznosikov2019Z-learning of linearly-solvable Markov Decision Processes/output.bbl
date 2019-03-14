@@ -1,0 +1,65 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Bernhard~Korte}{Bernhard~Korte}{2015}]{Korte}
+Bernhard~Korte, J.~V. (2015).
+\newblock {\em Combinatorial optimization. Theory and Algorithms\/}
+  (translation ed.).
+\newblock MCCME.
+
+\bibitem[\protect\citeauthoryear{Chertkov, Chernyak, and Deka}{Chertkov
+  et~al.}{2018}]{Chertkov}
+Chertkov, M., V.~Y. Chernyak, and D.~Deka (2018).
+\newblock Ensemble control of cycling energy loads: Markov decision approach.
+\newblock In {\em Energy Markets and Responsive Grids}, pp.\  363--382.
+  Springer.
+
+\bibitem[\protect\citeauthoryear{Durrett}{Durrett}{1996}]{Durrett}
+Durrett, R. (1996).
+\newblock {\em Probability: theory and examples\/} (Second ed.).
+\newblock Belmont, CA: Duxbury Press.
+
+\bibitem[\protect\citeauthoryear{Jin, Allen-Zhu, Bubeck, and Jordan}{Jin
+  et~al.}{2018}]{Allen-Zhu}
+Jin, C., Z.~Allen-Zhu, S.~Bubeck, and M.~I. Jordan (2018).
+\newblock Is q-learning provably efficient?
+\newblock {\em CoRR\/}~{\em abs/1807.03765}.
+
+\bibitem[\protect\citeauthoryear{Kim and Lim}{Kim and Lim}{2018}]{Kim}
+Kim, S. and H.~Lim (2018, 08).
+\newblock Reinforcement learning based energy management algorithm for smart
+  energy buildings.
+\newblock {\em Energies\/}~{\em 11}, 2010.
+
+\bibitem[\protect\citeauthoryear{Kuznetsova, Li, Ruiz, Zio, Bell, and
+  Ault}{Kuznetsova et~al.}{2013}]{Ruiz}
+Kuznetsova, E., Y.-F. Li, C.~Ruiz, E.~Zio, K.~Bell, and G.~Ault (2013, 05).
+\newblock Reinforcement learning for microgrid energy management.
+\newblock {\em Energy\/}~{\em 59}, 133–146.
+
+\bibitem[\protect\citeauthoryear{Leo, S~Milton, and Sibi}{Leo
+  et~al.}{2014}]{Raju}
+Leo, R., R.~S~Milton, and S.~Sibi (2014, 09).
+\newblock Reinforcement learning for optimal energy management of a solar
+  microgrid.
+\newblock pp.\  183--188.
+
+\bibitem[\protect\citeauthoryear{Liessner, Schroer, Dietermann, and
+  Bäker}{Liessner et~al.}{2018}]{Liessner}
+Liessner, R., C.~Schroer, A.~Dietermann, and B.~Bäker (2018, 01).
+\newblock Deep reinforcement learning for advanced energy management of hybrid
+  electric vehicles.
+\newblock pp.\  61--72.
+
+\bibitem[\protect\citeauthoryear{Szepesv{\'a}ri}{Szepesv{\'a}ri}{2010}]{Szepesvari}
+Szepesv{\'a}ri, C. (2010).
+\newblock {\em Algorithms for Reinforcement Learning}.
+\newblock Synthesis Lectures on Artificial Intelligence and Machine Learning.
+  Morgan \& Claypool Publishers.
+
+\bibitem[\protect\citeauthoryear{Todorov}{Todorov}{2006}]{Todorov}
+Todorov, E. (2006).
+\newblock Linearly-solvable markov decision problems.
+\newblock In B.~Sch{\"o}lkopf, J.~C. Platt, and T.~Hofmann (Eds.), {\em NIPS},
+  pp.\  1369--1376. MIT Press.
+
+\end{thebibliography}
